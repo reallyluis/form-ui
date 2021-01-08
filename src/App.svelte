@@ -1,22 +1,31 @@
 <!-- App.svelte -->
 <script>
-  import { onMount } from 'svelte';
+  let questions = [];
+  let question = '';
 
-  let count = 0;
+  const addQuestion = () => {
+    questions = [
+      ...questions,
+      question,
+    ];
 
-  onMount(() => {
-    const interval = setInterval(() => count++, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  });
+    question = '';
+  };
 </script>
 <style>
   /* css will go here */
 </style>
 <div class="App">
   <header class="App-header">
-    Starter App...
-    <p>Page has been open for <code>{count}</code> seconds.</p>
+    FORM
+    <ul>
+      {#each questions as quest}
+      <li>{quest}</li>
+      {/each}
+    </ul>
+    <div>
+      <input type="text" name="question" bind:value={question} />
+      <button type="button" on:click={addQuestion}>Add</button>
+    </div>
   </header>
 </div>
